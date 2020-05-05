@@ -7,6 +7,8 @@ use secp256k1::{PublicKey, Secp256k1, SecretKey};
 use std::str;
 
 fn main() {
+
+    // https://en.bitcoin.it/wiki/Technical_background_of_version_1_Bitcoin_addresses
     // 1. Having a private ECDSA key.
     // 18e14a7b6a307f426a94f8114701e7c8e774e7f9a47e2c2035db29a206321725
     let secp = Secp256k1::new();
