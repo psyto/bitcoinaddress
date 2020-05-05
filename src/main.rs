@@ -51,15 +51,13 @@ fn main() {
     // 9. Add the 4 checksum bytes from stage 7 at the end of extended RIPEMD-160 hash from stage 4.
     // This is the 25-byte binary Bitcoin Address.
     // 00f54a5851e9372b87810a8e60cdd2e7cfd80b6e31c7f18fe8
-    let mut checksumed_extended_ripmd160_sha256_public_key =
-        extended_ripmd160_sha256_public_key.clone();
-    checksumed_extended_ripmd160_sha256_public_key.extend(checksum);
+    let mut binary_bitcoin_address = extended_ripmd160_sha256_public_key.clone();
+    binary_bitcoin_address.extend(checksum);
 
     // 10. Convert the result from a byte string into a base58 string using Base58Check encoding.
     // This is the most commonly used Bitcoin Address format
     // 1PMycacnJaSqwwJqjawXBErnLsZ7RkXUAs
-    let bitcoin_address =
-        bs58::encode(&checksumed_extended_ripmd160_sha256_public_key).into_string();
+    let bitcoin_address = bs58::encode(&binary_bitcoin_address).into_string();
 
     println!("Private Key: {:?}", str::from_utf8(private_key).unwrap());
     println!("Public Key: {:?}", public_key);
@@ -82,8 +80,8 @@ fn main() {
     );
     println!("Chechsum: {:?}", &hex::encode(&checksum));
     println!(
-        "Checksumed Extended RIPMD-160 SHA256 Public Key: {:?}",
-        &hex::encode(&checksumed_extended_ripmd160_sha256_public_key)
+        "25-Byte Binary Bitcoin Address: {:?}",
+        &hex::encode(&binary_bitcoin_address)
     );
     println!("Bitcoin Address: {:?}", &bitcoin_address);
 }
@@ -97,6 +95,6 @@ Extended RIPMD-160 SHA-256 Public Key: "00f54a5851e9372b87810a8e60cdd2e7cfd80b6e
 SHA-256 Extended RIPMD-160 SHA-256 Public Key: ad3c854da227c7e99c4abfad4ea41d71311160df2e415e713318c70d67c6b41c
 Double SHA-256 Extended RIPMD-160 SHA-256 Public Key: c7f18fe8fcbed6396741e58ad259b5cb16b7fd7f041904147ba1dcffabf747fd
 Chechsum: "c7f18fe8"
-Checksumed Extended RIPMD-160 SHA256 Public Key: "00f54a5851e9372b87810a8e60cdd2e7cfd80b6e31c7f18fe8"
+25-Byte Bitcoin Address: "00f54a5851e9372b87810a8e60cdd2e7cfd80b6e31c7f18fe8"
 Bitcoin Address: "1PMycacnJaSqwwJqjawXBErnLsZ7RkXUAs"
 */
